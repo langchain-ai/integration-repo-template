@@ -3,10 +3,7 @@ import sys
 import os
 from typing import Dict
 
-LIB_DIRS = [
-    "libs/ai-endpoints",
-    "libs/trt",
-]
+LIB_DIRS = ["libs/{lib}"]
 
 if __name__ == "__main__":
     files = sys.argv[1:]
