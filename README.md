@@ -22,3 +22,4 @@ see [these docs](https://python.langchain.com/docs/contributing/integrations#par
 - [ ] Configure `LIB_DIRS` in .github/scripts/check_diff.py
 - [ ] Add partner collaborators in Github (ask Erick for help)
 - [ ] Add new repo to test-pypi and pypi trusted publishing (ask Erick for help)
+- [ ] Populate .github/workflows/_release.yml with `on.workflow_dispatch.inputs.working-directory.default`

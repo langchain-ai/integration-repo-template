@@ -27,28 +27,21 @@ if __name__ == "__main__":
             )
         ):
             # add all LANGCHAIN_DIRS for infra changes
-            dirs_to_run["extended-test"].update(LIB_DIRS)
-            dirs_to_run["lint"].add(".")
+            dirs_to_run["test"].update(LIB_DIRS)
 
         if any(file.startswith(dir_) for dir_ in LIB_DIRS):
             for dir_ in LIB_DIRS:
                 if file.startswith(dir_):
-                    # add that dir and all dirs after in LANGCHAIN_DIRS
-                    # for extended testing
                     dirs_to_run["test"].add(dir_)
         elif file.startswith("libs/"):
             raise ValueError(
                 f"Unknown lib: {file}. check_diff.py likely needs "
                 "an update for this new library!"
             )
-        elif any(file.startswith(p) for p in ["docs/", "templates/", "cookbook/"]):
-            dirs_to_run["lint"].add(".")
 
     outputs = {
-        "dirs-to-lint": list(
-            dirs_to_run["lint"] | dirs_to_run["test"] | dirs_to_run["extended-test"]
-        ),
-        "dirs-to-test": list(dirs_to_run["test"] | dirs_to_run["extended-test"]),
+        "dirs-to-lint": list(dirs_to_run["lint"] | dirs_to_run["test"]),
+        "dirs-to-test": list(dirs_to_run["test"]),
     }
     for key, value in outputs.items():
         json_output = json.dumps(value)
