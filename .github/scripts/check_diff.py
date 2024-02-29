@@ -1,6 +1,5 @@
 import json
 import sys
-import os
 from typing import Dict
 
 LIB_DIRS = ["libs/{lib}"]
