@@ -45,3 +45,7 @@ Pypi
 Slack
 
 - [ ] Set up release alerting in Slack (ask Erick for help)
+
+release:
+/github subscribe langchain-ai/langchain-{partner} releases workflows:{name:"release"}
+/github unsubscribe langchain-ai/langchain-{partner} issues pulls commits deployments
