@@ -1,9 +1,8 @@
 # 🦜️🔗 LangChain {partner}
 
-This repository contains {n} packages with {partner} integrations with LangChain:
+This repository contains 1 package with {partner} integrations with LangChain:
 
-- [langchain-{package}](https://pypi.org/project/langchain-{package}/) integrates [{product}}]({product_link}).
-{- ... if more packages}
+- [langchain-{package_lower}](https://pypi.org/project/langchain-{package_lower}/)
 
 ## Initial Repo Checklist (Remove this section after completing)
 
@@ -47,5 +46,5 @@ Slack
 - [ ] Set up release alerting in Slack (ask Erick for help)
 
 release:
-/github subscribe langchain-ai/langchain-{partner} releases workflows:{name:"release"}
-/github unsubscribe langchain-ai/langchain-{partner} issues pulls commits deployments
+/github subscribe langchain-ai/langchain-{partner_lower} releases workflows:{name:"release"}
+/github unsubscribe langchain-ai/langchain-{partner_lower} issues pulls commits deployments
