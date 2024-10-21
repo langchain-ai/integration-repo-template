@@ -27,6 +27,10 @@ Workflow code (manual)
 
 - [ ] Add secrets as env vars in .github/workflows/_release.yml
 
+Monorepo workflow code (manual)
+
+- [ ] Pull in new code location, remove old in .github/workflows/api_doc_build.yml
+
 In github (manual)
 
 - [ ] Add integration testing secrets in Github (ask Erick for help)
