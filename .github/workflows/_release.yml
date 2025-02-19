@@ -115,7 +115,12 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Import published package
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: ${{ inputs.working-directory }}/dist/
+
+      - name: Import dist package
         shell: bash
         working-directory: ${{ inputs.working-directory }}
         env:
@@ -161,7 +166,9 @@ jobs:
       - name: Run integration tests
         env:
           PARTNER_API_KEY: ${{ secrets.PARTNER_API_KEY }}
-        run: make integration_tests
+        run: |
+          uv sync --group test --group test_integration
+          make integration_tests
         working-directory: ${{ inputs.working-directory }}
 
       - name: Get minimum versions
