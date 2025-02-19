@@ -20,10 +20,7 @@ Code (auto ecli)
 
 - [ ] Fill out the readme above (for folks that follow pypi link)
 - [ ] Copy package into /libs folder
-- [ ] Update these fields in /libs/*/pyproject.toml
-
-    - `tool.poetry.repository`
-    - `tool.poetry.urls["Source Code"]`
+- [ ] Update `"Source Code"` and `repository` under `[project.urls]` in /libs/*/pyproject.toml
 
 Workflow code (auto ecli)
 
