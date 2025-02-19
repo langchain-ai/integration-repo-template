@@ -40,11 +40,11 @@ Monorepo workflow code (manual)
 
 In github (manual)
 
-- [ ] Add integration testing secrets in Github (ask Erick for help)
-- [ ] Add partner collaborators in Github (ask Erick for help)
+- [ ] Add integration testing secrets in Github (ask Chester for help)
+- [ ] Add partner collaborators in Github (ask Chester for help)
 - [ ] "Allow auto-merge" in General Settings 
 - [ ] Only "Allow squash merging" in General Settings
-- [ ] Set up ruleset matching CI build (ask Erick for help)
+- [ ] Set up ruleset matching CI build (ask Chester for help)
     - name: ci build
     - enforcement: active
     - bypass: write
@@ -59,11 +59,11 @@ In github (manual)
 
 Pypi (manual)
 
-- [ ] Add new repo to test-pypi and pypi trusted publishing (ask Erick for help)
+- [ ] Add new repo to test-pypi and pypi trusted publishing (ask Chester for help)
 
 Slack
 
-- [ ] Set up release alerting in Slack (ask Erick for help)
+- [ ] Set up release alerting in Slack (ask Chester for help)
 
 release:
 /github subscribe langchain-ai/langchain-{partner_lower} releases workflows:{name:"release"}
