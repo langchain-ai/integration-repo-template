@@ -11,7 +11,6 @@ Welcome to the LangChain Partner Integration Repository! This checklist will hel
 After creating your repo from the integration-repo-template, we'll go through the following steps:
 
 1. Setting up your new repository in GitHub
-2. 
 
 This setup assumes that the partner package is already split. For those instructions,
 see [these docs](https://python.langchain.com/docs/contributing/integrations#partner-packages).
