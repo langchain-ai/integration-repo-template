@@ -8,12 +8,14 @@ This repository contains 1 package with {partner} integrations with LangChain:
 
 Welcome to the LangChain Partner Integration Repository! This checklist will help you get started with your new repository.
 
-After creating your repo from the integration-repo-template, we'll go through the following steps:
-
-1. Setting up your new repository in GitHub
+After creating your repo from the integration-repo-template, we'll go through how to
+set up your new repository in Github.
 
 This setup assumes that the partner package is already split. For those instructions,
-see [these docs](https://python.langchain.com/docs/contributing/integrations#partner-packages).
+see [these docs](https://docs.langchain.com/oss/python/contributing/integrations-langchain).
+
+> [!NOTE]
+> Integration packages can be managed in your own Github organization.
 
 Code (auto ecli)
 
@@ -36,17 +38,17 @@ Monorepo workflow code (manual)
 
 In github (manual)
 
-- [ ] Add integration testing secrets in Github (ask Chester for help)
-- [ ] Add partner collaborators in Github (ask Chester for help)
-- [ ] "Allow auto-merge" in General Settings 
-- [ ] Only "Allow squash merging" in General Settings
-- [ ] Set up ruleset matching CI build (ask Chester for help)
+- [ ] Add any required integration testing secrets in Github
+- [ ] Add any required partner collaborators in Github
+- [ ] "Allow auto-merge" in General Settings (recommended)
+- [ ] Only "Allow squash merging" in General Settings (recommended)
+- [ ] Set up ruleset matching CI build (recommended)
     - name: ci build
     - enforcement: active
     - bypass: write
     - target: default branch
     - rules: restrict deletions, require status checks ("CI Success"), block force pushes
-- [ ] Set up ruleset
+- [ ] Set up ruleset (recommended)
     - name: require prs
     - enforcement: active
     - bypass: none
@@ -55,12 +57,7 @@ In github (manual)
 
 Pypi (manual)
 
-- [ ] Add new repo to test-pypi and pypi trusted publishing (ask Chester for help)
+- [ ] Add new repo to test-pypi and pypi trusted publishing
 
-Slack
-
-- [ ] Set up release alerting in Slack (ask Chester for help)
-
-release:
-/github subscribe langchain-ai/langchain-{partner_lower} releases workflows:{name:"release"}
-/github unsubscribe langchain-ai/langchain-{partner_lower} issues pulls commits deployments
+> [!NOTE]
+> Tag [@ccurme](https://github.com/ccurme) if you have questions on any step.
