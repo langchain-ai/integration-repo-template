@@ -80,22 +80,9 @@ jobs:
               f.write(f"pkg-name={pkg_name}\n")
               f.write(f"version={version}\n")
 
-  test-pypi-publish:
-    needs:
-      - build
-    uses:
-      ./.github/workflows/_test_release.yml
-    permissions:
-      id-token: write
-    with:
-      working-directory: ${{ inputs.working-directory }}
-      dangerous-nonmaster-release: ${{ inputs.dangerous-nonmaster-release }}
-    secrets: inherit
-
   pre-release-checks:
     needs:
       - build
-      - test-pypi-publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -130,15 +117,7 @@ jobs:
         env:
           PKG_NAME: ${{ needs.build.outputs.pkg-name }}
           VERSION: ${{ needs.build.outputs.version }}
-        # Here we use:
-        # - The default regular PyPI index as the *primary* index, meaning 
-        #   that it takes priority (https://pypi.org/simple)
-        # - The test PyPI index as an extra index, so that any dependencies that
-        #   are not found on test PyPI can be resolved and installed anyway.
-        #   (https://test.pypi.org/simple). This will include the PKG_NAME==VERSION
-        #   package because VERSION will not have been uploaded to regular PyPI yet.
-        # - attempt install again after 5 seconds if it fails because there is
-        #   sometimes a delay in availability on test pypi
+        # Install directly from the locally-built wheel (no index resolution needed).
         run: |
           uv venv
           VIRTUAL_ENV=.venv uv pip install dist/*.whl
@@ -194,11 +173,43 @@ jobs:
           make tests
         working-directory: ${{ inputs.working-directory }}
 
+  test-pypi-publish:
+    needs:
+      - build
+      - pre-release-checks
+    runs-on: ubuntu-latest
+    permissions:
+      # This permission is used for trusted publishing:
+      # https://blog.pypi.org/posts/2023-04-20-introducing-trusted-publishers/
+      #
+      # Trusted publishing has to also be configured on PyPI for each package:
+      # https://docs.pypi.org/trusted-publishers/adding-a-publisher/
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: ${{ inputs.working-directory }}/dist/
+
+      - name: Publish to test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: ${{ inputs.working-directory }}/dist/
+          verbose: true
+          print-hash: true
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+          # Temp workaround since attestations are on by default as of gh-action-pypi-publish v1.11.0
+          attestations: false
+
   publish:
     needs:
       - build
-      - test-pypi-publish
       - pre-release-checks
+      - test-pypi-publish
     runs-on: ubuntu-latest
     permissions:
       # This permission is used for trusted publishing:
@@ -237,8 +248,8 @@ jobs:
   mark-release:
     needs:
       - build
-      - test-pypi-publish
       - pre-release-checks
+      - test-pypi-publish
       - publish
     runs-on: ubuntu-latest
     permissions:
