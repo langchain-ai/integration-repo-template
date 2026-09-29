@@ -57,7 +57,7 @@ In github (manual)
 
 Pypi (manual)
 
-- [ ] Add new repo to test-pypi and pypi trusted publishing
+- [ ] Add new repo to test-pypi and pypi trusted publishing (workflow: `_release.yml`)
 
 > [!NOTE]
 > Tag [@ccurme](https://github.com/ccurme) if you have questions on any step.
